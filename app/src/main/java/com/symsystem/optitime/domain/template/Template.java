@@ -1,4 +1,4 @@
-package com.symsystem.optitime.domaine.template;
+package com.symsystem.optitime.domain.template;
 
 /**
  * Created by francois on 02/10/2016.

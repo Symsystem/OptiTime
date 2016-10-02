@@ -1,10 +1,10 @@
-package com.symsystem.optitime.domaine.task;
+package com.symsystem.optitime.domain.task;
 
 /**
  * Created by Pierre on 02/10/2016.
  */
 
-public class TaxId {
+public class TaskId {
 
     private int myId;
 
