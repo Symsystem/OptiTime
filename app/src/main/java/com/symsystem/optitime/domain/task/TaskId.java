@@ -1,18 +1,14 @@
 package com.symsystem.optitime.domain.task;
 
+import com.symsystem.optitime.common.AbstractId;
+
 /**
- * Created by Pierre on 02/10/2016.
+ * @author sym
  */
 
-public class TaskId {
+public final class TaskId extends AbstractId {
 
-    private int myId;
-
-    public int getId() {
-        return myId;
-    }
-
-    public void setId(int myId) {
-        this.myId = myId;
+    public TaskId(String id) {
+        super(id);
     }
 }

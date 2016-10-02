@@ -1,8 +1,14 @@
 package com.symsystem.optitime.domain.priority;
 
+import com.symsystem.optitime.common.AbstractId;
+
 /**
- * Created by francois on 02/10/2016.
+ * @author sym
  */
 
-public class PriorityId {
+public final class PriorityId extends AbstractId {
+
+    public PriorityId(String id) {
+        super(id);
+    }
 }

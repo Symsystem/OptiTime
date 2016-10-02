@@ -1,26 +1,32 @@
 package com.symsystem.optitime.domain.task;
 
+import java.util.Calendar;
+
 /**
- * Created by Pierre on 02/10/2016.
+ * @author pierre
  */
 
-public class Date {
+public final class Date {
 
+    private final Calendar calendar;
 
-    private java.util.Date myDate;
-    private int millis;
-
-    public Date (){
-
-        myDate = new java.util.Date( );
-
+    public Date(Calendar calendar){
+        this.calendar = calendar;
     }
 
-    public void setMillis(int millis) {
-        this.millis = millis;
+    public int day() {
+        return calendar.get(Calendar.DAY_OF_MONTH);
     }
 
-    public java.util.Date getMyDate() {
-        return myDate;
+    public int month() {
+        return calendar.get(Calendar.MONTH);
+    }
+
+    public int year() {
+        return calendar.get(Calendar.YEAR);
+    }
+
+    public long date() {
+        return calendar.getTimeInMillis();
     }
 }

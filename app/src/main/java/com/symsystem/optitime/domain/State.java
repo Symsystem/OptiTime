@@ -1,8 +1,13 @@
 package com.symsystem.optitime.domain;
 
 /**
- * Created by Sym on 2/10/16.
+ * The different states that a task can take.
+ *
+ * @author sym
  */
 
 public enum State {
+    TODO,
+    PROCESSING,
+    DONE,
 }

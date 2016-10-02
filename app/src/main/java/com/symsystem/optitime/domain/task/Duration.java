@@ -1,20 +1,25 @@
 package com.symsystem.optitime.domain.task;
 
 /**
- * Created by Pierre on 02/10/2016.
+ * @author pierre
  */
 
 public class Duration {
 
-    private int min;
-    private int hours;
+    private final int min;
+    private final int hours;
 
-    public void setHours(int hours) {
+    public Duration(int min, int hours) {
+        this.min = min;
         this.hours = hours;
     }
 
-    public void setMins(int min) {
-        this.min = min;
+    public Duration setHours(int hours) {
+        return new Duration(min, hours);
+    }
+
+    public Duration setMins(int min) {
+        return new Duration(min, hours);
     }
 
     public int getHours() {
