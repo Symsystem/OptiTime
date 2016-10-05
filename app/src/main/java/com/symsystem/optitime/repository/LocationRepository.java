@@ -10,14 +10,13 @@ import com.symsystem.optitime.domain.priority.Priority;
 import com.symsystem.optitime.domain.priority.PriorityId;
 
 /**
- * @author sym
+ * @author pie :)
  */
 
 public final class LocationRepository implements Repository<Location, LocationId> {
 
-    private final DBHandler db;
-
     private static String TABLE_NAME = "Location" ;
+    private final DBHandler db;
 
     public LocationRepository() {
         this.db = DBHandler.getDBHandler();
