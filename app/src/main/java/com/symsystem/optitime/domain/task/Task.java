@@ -5,6 +5,8 @@ import com.symsystem.optitime.domain.location.LocationId;
 import com.symsystem.optitime.domain.priority.PriorityId;
 
 /**
+ * @author sym
+ *
  * A Task is a mutable object that represents a atomic task to do with
  * its properties.
  *

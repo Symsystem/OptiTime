@@ -4,7 +4,7 @@ package com.symsystem.optitime.domain.task;
  * @author pierre
  */
 
-public class Duration {
+public final class Duration {
 
     private final int min;
     private final int hours;

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package application.task;
+
+option java_package = "com.symsystem.optitime.application.task";
+option java_outer_classname = "Command";
+
+message CreateTask {
+
+    string taskId = 1;
+
+    string name = 2;
+}
