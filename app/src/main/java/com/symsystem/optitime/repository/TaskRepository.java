@@ -4,8 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.symsystem.optitime.domain.State;
+import com.symsystem.optitime.domain.location.LocationId;
+import com.symsystem.optitime.domain.priority.PriorityId;
+import com.symsystem.optitime.domain.task.Date;
+import com.symsystem.optitime.domain.task.Duration;
 import com.symsystem.optitime.domain.task.Task;
 import com.symsystem.optitime.domain.task.TaskId;
+
+import java.util.Calendar;
 
 /**
  * @author sym
@@ -22,56 +29,83 @@ public final class TaskRepository implements Repository<Task, TaskId> {
     }
 
     @Override
-    public void save(Task entity) {
+    public void save(Task task) {
 
-        // Gets the data repository in write mode
-        SQLiteDatabase dataBase = db.getWritableDatabase();
+        SQLiteDatabase database = db.getWritableDatabase();
 
-        // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put("ID", entity.taskId().id());
-        values.put("NAME", entity.name());
+        values.put("ID", task.taskId().id());
+        values.put("NAME", task.name());
+        values.put("STATE", task.state().ordinal());
 
-
-        if (entity.duration() != null) {
-            values.put("DURATION", entity.duration().getHours()*60 +
-                    entity.duration().getMin());
+        if (task.duration() != null) {
+            values.put("DURATION",
+                    task.duration().getHours() * 60
+                            + task.duration().getMin());
         }
 
-        if (entity.priority() != null) {
-            values.put("PRIORITY", entity.priority().id());
+        if (task.priority() != null) {
+            values.put("PRIORITY", task.priority().id());
         }
 
+        if (task.location() != null){
+            values.put("LOCATION", task.location().id());}
 
-        if (entity.location() != null){
-            values.put("PRIORITY", entity.location().id());}
-
-
-        if (exists(entity.taskId())) {
-            dataBase.update(TABLE_NAME, values, "ID = ?",
-                    new String[]{entity.taskId().id()}) ;
-        }
-        // Insert the new row, returning the primary key value of the new row
-        else {
-            dataBase.insert(TABLE_NAME, null, values);
+        if (exists(task.taskId())) {
+            database.update(TABLE_NAME, values, "ID = ?",
+                    new String[]{task.taskId().id()}) ;
+        } else {
+            database.insert(TABLE_NAME, null, values);
         }
 
-        dataBase.close();
+        database.close();
     }
 
     @Override
-    public boolean exists(TaskId entity) {
-        // Gets the data repository in write mode
-        SQLiteDatabase dataBase = db.getReadableDatabase();
-        Cursor cursor = dataBase.rawQuery(String.format("SELEC ID FROM Task " +
-                "where id = %s", entity.id()) , null);
+    public boolean exists(TaskId id) {
+        SQLiteDatabase database = db.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT ID FROM ? where id = ?",
+                new String[]{TABLE_NAME, id.id()});
 
+        cursor.close();
         return cursor.getCount() == 1;
-
     }
 
     @Override
     public Task find(TaskId id) {
+
+        SQLiteDatabase database = db.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT ID FROM ? where id = ?",
+                new String[]{TABLE_NAME, id.id()});
+
+        if (cursor.getCount() == 1) {
+            Task task = new Task(id, cursor.getString(1));
+            task.setState(State.values()[cursor.getInt(2)]);
+
+            if (!cursor.isNull(cursor.getColumnIndex("LIMIT_DATE"))) {
+                Calendar cal = Calendar.getInstance();
+                cal.setTimeInMillis(cursor.getLong(
+                        cursor.getColumnIndex("LIMIT_DATE")));
+                task.setlimiteDate(new Date(cal));
+            }
+
+            if (!cursor.isNull(cursor.getColumnIndex("DURATION"))) {
+                int duration = cursor.getInt(cursor.getColumnIndex("DURATION"));
+                task.setDuration(new Duration(duration % 60, duration / 60));
+            }
+
+            if (!cursor.isNull(cursor.getColumnIndex("PRIORITY"))) {
+                task.setPriority(new PriorityId(
+                        cursor.getString(cursor.getColumnIndex("PRIORITY"))));
+            }
+
+            if (!cursor.isNull(cursor.getColumnIndex("LOCATION"))) {
+                task.setLocation(new LocationId(
+                        cursor.getString(cursor.getColumnIndex("LOCATION"))));
+            }
+
+            return task;
+        }
         return null;
     }
 }

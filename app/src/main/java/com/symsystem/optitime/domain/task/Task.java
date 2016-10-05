@@ -29,8 +29,8 @@ public final class Task {
 
     private String name;
     private Date limiteDate;
-    private Duration duration;
     private State currentState;
+    private Duration duration;
     private PriorityId priority;
     private LocationId location;
 
@@ -38,26 +38,6 @@ public final class Task {
         this.taskId = id;
         this.name = name;
         this.currentState = State.TODO;
-    }
-
-    public void setlimiteDate(Date date) {
-        limiteDate = date;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setDuration(Duration duration) {
-        this.duration = duration;
-    }
-
-    public void setState(State state) {
-        this.currentState = state;
-    }
-
-    public void priority(PriorityId priority) {
-        this.priority = priority;
     }
 
     /**
@@ -102,4 +82,27 @@ public final class Task {
         return location;
     }
 
+    public void setlimiteDate(Date date) {
+        limiteDate = date;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public void setState(State state) {
+        this.currentState = state;
+    }
+
+    public void setPriority(PriorityId priority) {
+        this.priority = priority;
+    }
+
+    public void setLocation(LocationId location) {
+        this.location = location;
+    }
 }

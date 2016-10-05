@@ -30,13 +30,13 @@ public final class PriorityRepository implements Repository<Priority, PriorityId
 
         // Create a new map of values, where column names are the keys
         ContentValues values = new ContentValues();
-        values.put("ID", entity.priorityid().id());
-        values.put("PRIORITY", entity.getPriority());
+        values.put("ID", entity.id().id());
+        values.put("PRIORITY", entity.name());
 
 
-        if (exists(entity.priorityid())) {
+        if (exists(entity.id())) {
             dataBase.update(TABLE_NAME, values, "ID = ?",
-                    new String[]{entity.priorityid().id()});
+                    new String[]{entity.id().id()});
         }
         // Insert the new row, returning the primary key value of the new row
         else {

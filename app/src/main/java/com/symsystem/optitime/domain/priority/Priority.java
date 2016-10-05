@@ -1,34 +1,38 @@
 package com.symsystem.optitime.domain.priority;
 
 /**
- * A Priority is a mutable object that represents the priority of a task to do
+ * A Priority is a mutable object that represents the priority of a task.
  *
- * @specfield id : TaskId        // The id of the task.
- * @specfield name : String      // The name that labels and describes the task.
+ * @specfield id : PriorityId    // The id of the priority.
+ * @specfield name : String      // The name that labels the priority.
 
  *
  * @invariant id not null
  * @invariant name not null and not empty String
  *
- * TODO : comprendre ce que fait la dernière méthode
  */
 
 public class Priority {
 
-    private PriorityId id;
-    private int priority;
+    private final PriorityId id;
+    private String name;
 
-
-    public void changePriority(int priority) {
-        this.priority = priority;
+    public Priority(PriorityId id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
-    public PriorityId priorityid(){
-
-        return this.id;
+    public String name() {
+        return name;
     }
 
-    public int getPriority() {
-        return this.priority;
+    public void changeName(String name) {
+        this.name = name;
     }
+
+    public PriorityId id(){
+        return id;
+    }
+
+
 }

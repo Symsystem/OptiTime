@@ -11,3 +11,10 @@ message CreateTask {
 
     string name = 2;
 }
+
+message AddLimitDate {
+
+    string taskId = 1;
+
+    int64 date = 2;
+}

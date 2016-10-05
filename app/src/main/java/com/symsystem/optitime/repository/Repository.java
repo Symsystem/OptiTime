@@ -4,7 +4,7 @@ package com.symsystem.optitime.repository;
  * @author sym
  */
 
-public interface Repository<T, I> {
+interface Repository<T, I> {
 
     void save(T entity);
 
