@@ -1,6 +1,7 @@
 # Built application files
+./build
+./gradle
 app/build/*
-gradle/*
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml

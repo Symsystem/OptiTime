@@ -13,7 +13,7 @@ import com.symsystem.optitime.domain.priority.PriorityId;
  * @specfield id : TaskId        // The id of the task.
  * @specfield name : String      // The name that labels and describes the task.
  * @specfield limitDate : Date   // The end date where the task should be done
- * @sepcfield duration : Duration   // The amount of time the task is expected
+ * @specfield duration : Duration   // The amount of time the task is expected
  *                                      to take.
  * @specfield state : State      // The current state which the task is in.
  * @specfield priority : Priority   // The priority of the task
@@ -43,7 +43,7 @@ public final class Task {
     /**
      * @return the id of the task
      */
-    public TaskId taskId() {
+    public TaskId id() {
         return taskId;
     }
 
@@ -52,6 +52,13 @@ public final class Task {
      */
     public String name() {
         return name;
+    }
+
+    /**
+     * @return the limit date of the task
+     */
+    public Date limitDate() {
+        return limiteDate;
     }
 
     /**

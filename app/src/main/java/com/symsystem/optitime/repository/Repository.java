@@ -6,6 +6,8 @@ package com.symsystem.optitime.repository;
 
 interface Repository<T, I> {
 
+    String nextIdentity();
+
     void save(T entity);
 
     boolean exists(I entity);

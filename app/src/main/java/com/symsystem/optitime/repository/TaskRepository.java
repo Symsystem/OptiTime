@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.symsystem.optitime.common.IdentityGenerator;
 import com.symsystem.optitime.domain.State;
 import com.symsystem.optitime.domain.location.LocationId;
 import com.symsystem.optitime.domain.priority.PriorityId;
@@ -23,9 +24,11 @@ import java.util.Calendar;
 
 public final class TaskRepository implements Repository<Task, TaskId> {
 
-    private final DBHandler db;
     private static TaskRepository taskRepository = null;
-    private static String TABLE_NAME = "Task" ;
+    private static final String TABLE_NAME = "Task" ;
+    private static final String CODE = "TAS";
+
+    private final DBHandler db;
 
     private TaskRepository() {
         this.db = DBHandler.getDBHandler();
@@ -39,14 +42,23 @@ public final class TaskRepository implements Repository<Task, TaskId> {
     }
 
     @Override
+    public String nextIdentity() {
+        return IdentityGenerator.getInstance().newIdentity(CODE);
+    }
+
+    @Override
     public void save(Task task) {
 
         SQLiteDatabase database = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("ID", task.taskId().id());
+        values.put("ID", task.id().id());
         values.put("NAME", task.name());
         values.put("STATE", task.state().ordinal());
+
+        if (task.limitDate() != null) {
+            values.put("LIMIT_DATE", task.limitDate().date());
+        }
 
         if (task.duration() != null) {
             values.put("DURATION",
@@ -61,9 +73,9 @@ public final class TaskRepository implements Repository<Task, TaskId> {
         if (task.location() != null){
             values.put("LOCATION", task.location().id());}
 
-        if (exists(task.taskId())) {
+        if (exists(task.id())) {
             database.update(TABLE_NAME, values, "ID = ?",
-                    new String[]{task.taskId().id()}) ;
+                    new String[]{task.id().id()}) ;
         } else {
             database.insert(TABLE_NAME, null, values);
         }
