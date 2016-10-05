@@ -11,4 +11,5 @@ public final class TaskId extends AbstractId {
     public TaskId(String id) {
         super(id);
     }
+
 }
