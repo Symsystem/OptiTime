@@ -15,17 +15,27 @@ import com.symsystem.optitime.domain.task.TaskId;
 import java.util.Calendar;
 
 /**
+ * A TaskRepository represents the adapter communicating with the SQLite
+ * database.
+ *
  * @author sym
  */
 
 public final class TaskRepository implements Repository<Task, TaskId> {
 
     private final DBHandler db;
-
+    private static TaskRepository taskRepository = null;
     private static String TABLE_NAME = "Task" ;
 
-    public TaskRepository() {
+    private TaskRepository() {
         this.db = DBHandler.getDBHandler();
+    }
+
+    public static TaskRepository getInstance() {
+        if (taskRepository == null) {
+            taskRepository = new TaskRepository();
+        }
+        return taskRepository;
     }
 
     @Override

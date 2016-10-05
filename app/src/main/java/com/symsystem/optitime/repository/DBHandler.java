@@ -30,7 +30,7 @@ public final class DBHandler extends SQLiteOpenHelper {
         this.context = context;
     }
 
-    public static DBHandler getDBHandler(Context context) {
+    public static DBHandler createDBHandler(Context context) {
         if (db == null) {
             db = new DBHandler(context);
         }
@@ -39,8 +39,7 @@ public final class DBHandler extends SQLiteOpenHelper {
 
     public static DBHandler getDBHandler() {
         if (db == null) {
-            throw new FailureException("Try to get DBHandler that is not yet " +
-                    "initialized");
+            throw new FailureException("Try to get DBHandler that is not yet created");
         }
         return db;
     }
