@@ -1,8 +1,14 @@
 package com.symsystem.optitime.domain.template;
 
+import com.symsystem.optitime.common.AbstractId;
+
 /**
- * Created by francois on 02/10/2016.
+ * @author caizan
  */
 
-public class TemplateId {
+public class TemplateId extends AbstractId{
+
+    public TemplateId(String id) {
+        super(id);
+    }
 }
