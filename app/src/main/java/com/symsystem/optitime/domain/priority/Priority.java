@@ -16,11 +16,11 @@ package com.symsystem.optitime.domain.priority;
 public class Priority {
 
     private PriorityId id;
-    private String name;
+    private int priority;
 
 
-    public void changeName(String name) {
-        this.name = name;
+    public void changePriority(int priority) {
+        this.priority = priority;
     }
 
     public PriorityId priorityid(){
@@ -28,5 +28,7 @@ public class Priority {
         return this.id;
     }
 
-
+    public int getPriority() {
+        return this.priority;
+    }
 }

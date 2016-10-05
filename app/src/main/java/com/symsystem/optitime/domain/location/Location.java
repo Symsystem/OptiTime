@@ -1,5 +1,7 @@
 package com.symsystem.optitime.domain.location;
 
+import com.symsystem.optitime.domain.priority.PriorityId;
+
 /**
  * A Location is a mutable object that represents the location where the task
  * should be performed
@@ -28,5 +30,14 @@ public class Location {
      */
     public void Name(String name) {
         this.name = name;
+    }
+
+    public LocationId locationId(){
+
+        return this.id;
+    }
+
+    public String getName() {
+        return name;
     }
 }
