@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.symsystem.optitime.common.IdentityGenerator;
 import com.symsystem.optitime.domain.location.Location;
 import com.symsystem.optitime.domain.location.LocationId;
 import com.symsystem.optitime.domain.priority.Priority;
@@ -15,11 +16,19 @@ import com.symsystem.optitime.domain.priority.PriorityId;
 
 public final class LocationRepository implements Repository<Location, LocationId> {
 
+    private static final String CODE = "LOC";
     private static String TABLE_NAME = "Location" ;
     private final DBHandler db;
 
+
     public LocationRepository() {
         this.db = DBHandler.getDBHandler();
+    }
+
+    @Override
+    public String nextIdentity() {
+
+        return IdentityGenerator.getInstance().newIdentity(CODE);
     }
 
     @Override
@@ -50,7 +59,7 @@ public final class LocationRepository implements Repository<Location, LocationId
     public boolean exists(LocationId entity) {
         // Gets the data repository in write mode
         SQLiteDatabase dataBase = db.getReadableDatabase();
-        Cursor cursor = dataBase.rawQuery(String.format("SELEC ID FROM Location " +
+        Cursor cursor = dataBase.rawQuery(String.format("SELECT ID FROM Location " +
                 "where id = %s", entity.id()) , null);
 
         return cursor.getCount() == 1;
@@ -59,6 +68,16 @@ public final class LocationRepository implements Repository<Location, LocationId
 
     @Override
     public Location find(LocationId id) {
+        SQLiteDatabase database = db.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT ID FROM ? where id = ?",
+                new String[]{TABLE_NAME, id.id()});
+
+        if (cursor.getCount() == 1) {
+            Location location = new Location(id, cursor.getString(1));
+
+
+            return location;
+        }
         return null;
     }
 }

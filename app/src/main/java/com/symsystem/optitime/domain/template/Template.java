@@ -104,4 +104,7 @@ public final class Template {
         return location;
     }
 
+    public void setLocation(LocationId location) {
+        this.location = location;
+    }
 }

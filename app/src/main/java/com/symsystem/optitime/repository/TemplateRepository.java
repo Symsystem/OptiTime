@@ -4,10 +4,20 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.symsystem.optitime.common.IdentityGenerator;
+import com.symsystem.optitime.domain.State;
+import com.symsystem.optitime.domain.location.LocationId;
+import com.symsystem.optitime.domain.priority.PriorityId;
+import com.symsystem.optitime.domain.task.Date;
+import com.symsystem.optitime.domain.task.Duration;
 import com.symsystem.optitime.domain.task.Task;
 
 import com.symsystem.optitime.domain.template.Template;
 import com.symsystem.optitime.domain.template.TemplateId;
+
+import java.util.Calendar;
+
+import static java.lang.Math.round;
 
 /**
  * @author sym
@@ -15,12 +25,17 @@ import com.symsystem.optitime.domain.template.TemplateId;
 
 public final class TemplateRepository implements Repository<Template, TemplateId> {
 
-    private final DBHandler db;
-
+    private static final String CODE = "TEM";
     private static String TABLE_NAME = "Template" ;
+    private final DBHandler db;
 
     public TemplateRepository() {
         this.db = DBHandler.getDBHandler();
+    }
+
+    @Override
+    public String nextIdentity() {
+        return IdentityGenerator.getInstance().newIdentity(CODE);
     }
 
     @Override
@@ -65,7 +80,7 @@ public final class TemplateRepository implements Repository<Template, TemplateId
     public boolean exists(TemplateId entity) {
         // Gets the data repository in write mode
         SQLiteDatabase dataBase = db.getReadableDatabase();
-        Cursor cursor = dataBase.rawQuery(String.format("SELEC ID FROM Template " +
+        Cursor cursor = dataBase.rawQuery(String.format("SELECT ID FROM Template " +
                 "where id = %s", entity.id()) , null);
 
         return cursor.getCount() == 1;
@@ -74,6 +89,32 @@ public final class TemplateRepository implements Repository<Template, TemplateId
 
     @Override
     public Template find(TemplateId id) {
+
+        SQLiteDatabase database = db.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT ID FROM ? where id = ?",
+                new String[]{TABLE_NAME, id.id()});
+
+        if (cursor.getCount() == 1) {
+            Template template = new Template(id, cursor.getString(1));
+
+
+            if (!cursor.isNull(cursor.getColumnIndex("DURATION"))) {
+                int duration = Integer.parseInt(cursor.getString(2));
+                template.setDuration(new Duration(duration % 60, duration / 60));
+            }
+
+            if (!cursor.isNull(cursor.getColumnIndex("PRIORITY"))) {
+                template.priority(new PriorityId(
+                        cursor.getString(cursor.getColumnIndex("PRIORITY"))));
+            }
+
+            if (!cursor.isNull(cursor.getColumnIndex("LOCATION"))) {
+                template.setLocation(new LocationId(
+                        cursor.getString(cursor.getColumnIndex("LOCATION"))));
+            }
+
+            return template;
+        }
         return null;
     }
 }
