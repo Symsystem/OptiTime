@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package application.template;
+
+option java_package = "com.symsystem.optitime.application.template";
+option java_outer_classname = "Command";
+
+message CreateTemplate {
+
+    string name = 1;
+}
+
+message ChangeName {
+
+    string templateId = 1;
+
+    string  name = 2;
+}
+
+message SetDuration {
+
+    string templateId = 1;
+        int64 mins = 2;
+        int64 hours = 3;
+
+}
+
+
+
+message AddPriority {
+
+    string templateId = 1;
+    string priorityId = 2;
+
+
+}
+message AddLocation {
+
+    string templateId = 1;
+    string locationId = 2;
+
+
+}
+
+

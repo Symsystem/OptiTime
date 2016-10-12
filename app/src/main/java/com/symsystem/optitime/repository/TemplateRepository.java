@@ -28,11 +28,19 @@ public final class TemplateRepository implements Repository<Template, TemplateId
     private static final String CODE = "TEM";
     private static String TABLE_NAME = "Template" ;
     private final DBHandler db;
+    private static TemplateRepository templateRepository = null;
 
-    public TemplateRepository() {
+    private TemplateRepository() {
         this.db = DBHandler.getDBHandler();
     }
 
+
+    public static TemplateRepository getInstance() {
+        if (templateRepository == null) {
+            templateRepository = new TemplateRepository();
+        }
+        return templateRepository;
+    }
     @Override
     public String nextIdentity() {
         return IdentityGenerator.getInstance().newIdentity(CODE);

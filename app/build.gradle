@@ -1,6 +1,5 @@
-apply plugin: 'com.google.protobuf'
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.protobuf'
 android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
@@ -18,7 +17,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    sourceSets.main.proto { srcDir '../proto' }
+   // sourceSets.main.proto { srcDir '../proto' }
 }
 
 dependencies {
@@ -30,7 +29,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 }
-
 buildscript {
     repositories {
         mavenCentral()

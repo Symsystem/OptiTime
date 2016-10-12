@@ -10,9 +10,50 @@ message CreateTask {
     string name = 1;
 }
 
-message AddLimitDate {
+message ChangeName {
+
+    string taskId = 1;
+
+    string  name = 2;
+}
+message ChangeState {
+
+    string taskId = 1;
+    int64 state = 2;
+
+}
+
+message ChangeLimitDate {
 
     string taskId = 1;
 
     int64 date = 2;
 }
+
+
+message SetDuration {
+
+    string taskId = 1;
+        int64 mins = 2;
+        int64 hours = 3;
+
+}
+
+
+
+message AddPriority {
+
+    string taskId = 1;
+    string priorityId = 2;
+
+
+}
+message AddLocation {
+
+    string taskId = 1;
+    string locationId = 2;
+
+
+}
+
+
