@@ -73,10 +73,7 @@ public final class LocationRepository implements Repository<Location, LocationId
                 new String[]{TABLE_NAME, id.id()});
 
         if (cursor.getCount() == 1) {
-            Location location = new Location(id, cursor.getString(1));
-
-
-            return location;
+            return new Location(id, cursor.getString(1));
         }
         return null;
     }
