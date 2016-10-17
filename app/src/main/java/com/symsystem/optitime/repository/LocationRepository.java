@@ -20,6 +20,15 @@ public final class LocationRepository implements Repository<Location, LocationId
     private static String TABLE_NAME = "Location" ;
     private final DBHandler db;
 
+    private static LocationRepository locationRepository = null;
+
+    public static LocationRepository getInstance() {
+        if ( locationRepository== null) {
+            locationRepository = new LocationRepository();
+        }
+        return locationRepository;
+    }
+
 
     public LocationRepository() {
         this.db = DBHandler.getDBHandler();

@@ -1,6 +1,8 @@
 package com.symsystem.optitime.application.template;
 
 
+import com.symsystem.optitime.domain.location.LocationId;
+import com.symsystem.optitime.domain.priority.PriorityId;
 import com.symsystem.optitime.domain.task.Duration;
 import com.symsystem.optitime.domain.template.Template;
 import com.symsystem.optitime.domain.template.TemplateId;
@@ -8,6 +10,7 @@ import com.symsystem.optitime.repository.TemplateRepository;
 
 /**
  * @author sym
+ * @author pierrot ^^
  */
 
 public class TemplateApplicationService {
@@ -56,10 +59,22 @@ public class TemplateApplicationService {
 
     public void addPriority(Command.AddPriority command){
 
+        Template template = templateRepository.find(new TemplateId(
+                command.getTemplateId()
+        ));
+        template.priority(new PriorityId(command.getPriorityId()));
 
+        templateRepository.save(template);
     }
 
     public void addLocation(Command.AddLocation command){
+        Template template = templateRepository.find(new TemplateId(
+                command.getTemplateId()
+        ));
+        template.setLocation(new LocationId(command.getLocationId()));
+
+        templateRepository.save(template);
+
 
     }
 

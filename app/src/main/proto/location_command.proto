@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package application.location;
+
+option java_package = "com.symsystem.optitime.application.location";
+option java_outer_classname = "Command";
+
+message CreateLocation {
+
+    string name = 1;
+}
+
+message ChangeName {
+
+    string LocationId = 1;
+
+    string  name = 2;
+}

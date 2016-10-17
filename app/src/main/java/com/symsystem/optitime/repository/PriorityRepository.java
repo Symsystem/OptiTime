@@ -22,6 +22,16 @@ public final class PriorityRepository implements Repository<Priority, PriorityId
     private static String TABLE_NAME = "PRIORITY";
     private final DBHandler db;
 
+    private static PriorityRepository priorityRepository = null;
+
+    public static PriorityRepository getInstance() {
+        if ( priorityRepository == null) {
+            priorityRepository = new PriorityRepository();
+        }
+        return priorityRepository;
+    }
+
+
     public PriorityRepository() {
         this.db = DBHandler.getDBHandler();
     }

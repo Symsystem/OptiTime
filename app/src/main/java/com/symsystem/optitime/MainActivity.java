@@ -2,6 +2,10 @@ package com.symsystem.optitime;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.symsystem.optitime.repository.DBHandler;
 
@@ -14,4 +18,24 @@ public class MainActivity extends AppCompatActivity {
 
         DBHandler.createDBHandler(this);
     }
+
+
+    /*@Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_add_tast, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.add_task:
+                Toast.makeText(this, "test 1 pushed", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }*/
 }

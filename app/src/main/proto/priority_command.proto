@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package application.priority;
+
+option java_package = "com.symsystem.optitime.application.priority";
+option java_outer_classname = "Command";
+
+message CreatePriority {
+
+    string name = 1;
+}
+
+message ChangeName {
+
+    string priorityId = 1;
+
+    string  name = 2;
+}
