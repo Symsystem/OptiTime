@@ -1,4 +1,4 @@
-package com.symsystem.optitime.application.application.priority;
+package com.symsystem.optitime.application.priority;
 
 
 import com.symsystem.optitime.application.priority.Command;

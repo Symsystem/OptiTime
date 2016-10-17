@@ -1,7 +1,6 @@
-package com.symsystem.optitime.application.application.location;
+package com.symsystem.optitime.application.location;
 
 
-import com.symsystem.optitime.application.location.Command;
 import com.symsystem.optitime.domain.location.Location;
 import com.symsystem.optitime.domain.location.LocationId;
 import com.symsystem.optitime.repository.LocationRepository;
