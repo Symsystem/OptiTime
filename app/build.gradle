@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.google.protobuf'
-apply plugin: 'android'
 
 android {
     compileSdkVersion 24
@@ -30,8 +29,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
     compile 'com.google.protobuf:protobuf-java:3.0.0'
-    compile 'com.google.protobuf:protobuf-gradle-plugin:0.8.0'
 }
+
 buildscript {
     repositories {
         mavenCentral()
