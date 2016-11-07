@@ -2,22 +2,19 @@
 OptiTime is an application that allows you to optimize your time by doing things you don't always remember to do.
 
 ## Ideas :
-Liste intelligente qui affiche les tâches à faire selon leur potentiel à être faite maitenant.
--	Les tâches prennent des couleurs différentes selon leur priorité OU la date d’échéance qui se rapproche.
--	Filtre des tâches selon le temps qu’on dispose  5min, 30min, 2h, etc (classes de temps)
--	Valider une tâche en 1 clic
+Clever list which displays all the different task to-do given their potential to be done at this very same instant.
+- Tasks change colors if the ending date is approching OR if the priority is high.
+-	Filter all task given the time we have 5-10-15 mins (time classes)
+-	Be able to validate a task in one click
 
-## Ajout de taches rapides :
+## Add a tache quickly :
 -	Label
--	Approximation de temps (classes de temps)
--	Priorité
--	Date de fin
+-	Time Classes
+-	Priority
+-	Ending date
 
-## Paramètres utilisateur :
--	Gérer les classes de temps
--	Gérer les différentes priorités (=> couleurs)	
+## User settings :
+-	Deal with time classes
+-	Deal with priorities
 
-Définir plages horaires comme semaine “type” pour que l’appli sache combien de temps on a à disposition potentiellement.
-
-## Historique des tâches faites
-
+## Historic of already-done tasks.
